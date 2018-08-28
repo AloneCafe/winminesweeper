@@ -31,7 +31,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	POINT ptOld;
 
 	if ((hwnd = FindWindow(NULL, TEXT("扫雷"))) == NULL) {
-		MessageBox(NULL, TEXT("获取窗口句柄失败"), lpszProgName, MB_ICONERROR | MB_OK);
+		MessageBox(NULL, TEXT("获取窗口句柄失败，请检查扫雷程序是否已运行"), lpszProgName, MB_ICONERROR | MB_OK);
 		return 0;
 	}
 
@@ -63,8 +63,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 				do {
 					Move(hwnd, i, j);
 					mouse_event(MOUSEEVENTF_RIGHTDOWN, 0, 0, 0, NULL);
-					mouse_event(MOUSEEVENTF_RIGHTUP, 0, 0, 0, NULL);
 					Sleep(1);
+					mouse_event(MOUSEEVENTF_RIGHTUP, 0, 0, 0, NULL);
 					Assert(ReadProcessMemory(hProc, (LPVOID)(lpAddr + (i * 0x20) + j), &bData, sizeof(bData), NULL));
 				} while (bData == 0x8F);
 				nSweepedMines += 1;
@@ -76,18 +76,18 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 				do {
 					Move(hwnd, i, j);
 					mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, NULL);
-					mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, NULL);
 					Sleep(1);
+					mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, NULL);
 					Assert(ReadProcessMemory(hProc, (LPVOID)(lpAddr + (i * 0x20) + j), &bData, sizeof(bData), NULL));
 				} while (bData == 0x0F);
 			}
 		}
 	}
 
+	MessageBox(hwnd, TEXT("全自动扫描完毕！\n\n点击“确定”按钮关闭"), lpszProgName, MB_OK | MB_ICONINFORMATION);
 	SetWindowText(hwnd, TEXT("扫雷"));
 	SetCursorPos(ptOld.x, ptOld.y);
 	InvalidateRect(hwnd, NULL, TRUE);
 	UpdateWindow(hwnd);
-	MessageBox(hwnd, TEXT("全自动扫描完毕！\n\n点击“确定”按钮关闭"), lpszProgName, MB_OK | MB_ICONINFORMATION);
 	return 0;
 }
