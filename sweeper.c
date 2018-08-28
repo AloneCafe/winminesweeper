@@ -85,9 +85,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		}
 	}
 
+  SetCursorPos(ptOld.x, ptOld.y);
 	MessageBox(hwnd, TEXT("全自动扫描完毕！\n\n点击“确定”按钮关闭"), lpszProgName, MB_OK | MB_ICONINFORMATION);
 	SetWindowText(hwnd, TEXT("扫雷"));
-	SetCursorPos(ptOld.x, ptOld.y);
 	InvalidateRect(hwnd, NULL, TRUE);
 	UpdateWindow(hwnd);
 	return 0;
