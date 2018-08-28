@@ -1,5 +1,5 @@
 #include <windows.h>
-#include <Strsafe.h>
+#include <tchar.h>
 
 LPCTSTR lpszProgName = TEXT("全自动扫雷器");
 TCHAR szBuff[500];
@@ -54,7 +54,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		for (j = 0; j < nWidth; j++) {
 			Assert(ReadProcessMemory(hProc, (LPCVOID)0x1005330, &nMines, sizeof(nMines), NULL));
 			Assert(ReadProcessMemory(hProc, (LPVOID)(lpAddr + (i * 0x20) + j), &bData, sizeof(bData), NULL));
-			StringCchPrintf(szBuff, sizeof(szBuff) / sizeof(TCHAR), TEXT("扫雷（全自动扫雷中 - 剩余地雷个数：%d）"), nMines - nSweepedMines);
+			//StringCchPrintf(szBuff, sizeof(szBuff) / sizeof(TCHAR), TEXT("扫雷（全自动扫雷中 - 剩余地雷个数：%d）"), nMines - nSweepedMines);
+			_stprintf(szBuff, TEXT("扫雷（全自动扫雷中 - 剩余地雷个数：%d）"), nMines - nSweepedMines);
 			SetWindowText(hwnd, szBuff);
 			SwitchToThisWindow(hwnd, TRUE);
 
