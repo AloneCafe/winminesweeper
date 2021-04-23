@@ -5,4 +5,4 @@ The implement of full-auto winmine sweeper in Win32 C
 Open the winmine first, then run this blob which you can build from the sources in this project.
 
 ## Demo
-![demo.gif](https://github.com/YenyuLoong/winminesweeper/raw/master/images/demo.gif)
+![demo.gif](https://github.com/AloneCafe/winminesweeper/raw/master/images/demo.gif)
